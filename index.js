@@ -12,16 +12,36 @@ fetch("assets/data.tsv")
 
 let 推導方案;
 
-const data_url =
-  "https://nk2028-1305783649.file.myqcloud.com/qieyun-examples/tupa.js";
+function determineDataURL() {
+  const { value } = document.getElementById("推導方案");
+  return {
+    tupa: "https://nk2028-1305783649.file.myqcloud.com/qieyun-examples/tupa.js",
+    baxter:
+      "https://nk2028-1305783649.file.myqcloud.com/qieyun-examples/baxter.js",
+    blankego:
+      "https://nk2028-1305783649.file.myqcloud.com/qieyun-examples/blankego.js",
+    kyonh:
+      "https://nk2028-1305783649.file.myqcloud.com/qieyun-examples/kyonh.js",
+    zyepheng:
+      "https://nk2028-1305783649.file.myqcloud.com/qieyun-examples/zyepheng.js",
+    sliark_peengqvim:
+      "https://nk2028-1305783649.file.myqcloud.com/qieyun-examples/sliark_peengqvim.js",
+    ayaka_2021:
+      "https://raw.githubusercontent.com/ayaka14732/rime-ayaka-2021/main/build/ayaka_2021.js",
+  }[value];
+}
 
-fetch(data_url)
-  .then((response) => response.text())
-  .then((func_body) => {
-    推導方案 = Qieyun.推導方案.建立(
-      new Function("音韻地位", "字頭", "選項", func_body)
-    );
-  });
+function refreshSchema() {
+  fetch(determineDataURL())
+    .then((response) => response.text())
+    .then((func_body) => {
+      推導方案 = Qieyun.推導方案.建立(
+        new Function("音韻地位", "字頭", "選項", func_body)
+      );
+    });
+}
+
+refreshSchema();
 
 let isStopped = false;
 let boardEventId;
@@ -72,8 +92,7 @@ function refreshBoard() {
   }, 1400);
 }
 
-document.body.addEventListener("click", (e) => {
+function handlePause() {
   if (isStopped) startBoard();
   else stopBoard();
-  e.preventDefault();
-});
+}

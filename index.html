@@ -13,6 +13,21 @@
     <p lang="ltc-Latn" id="k"></p>
     <p lang="ltc-Hant" id="v"></p>
   </div>
+  <form>
+    <select lang="zh-HK" name="推導方案" id="推導方案">
+      <option value="tupa">切韻拼音</option>
+      <option value="baxter">白一平轉寫</option>
+      <option value="blankego">有女羅馬字</option>
+      <option value="kyonh">古韻羅馬字</option>
+      <option value="zyepheng">隋拼</option>
+      <option value="sliark_peengqvim">Sliark 拼音</option>
+      <!-- Ayaka 2021 Romanisation is still in its early stages.
+          Labeled as 字體測試 (font test) to prevent inadvertent use. -->
+      <option value="ayaka_2021">字體測試</option>
+    </select>
+    <input type="button" value="適用" onclick="refreshSchema(); return false">
+    <input type="button" value="暫停" onclick="handlePause()">
+  </form>
   <script src="index.js"></script>
 </body>
 </html>
