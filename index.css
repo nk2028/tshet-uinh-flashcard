@@ -2,7 +2,7 @@ html {
     background-color: black;
     color: #eee;
     min-height: 100vh;
-    background-image: url(grid.jpg);
+    background-image: url(assets/grid.jpg);
     background-repeat: repeat;
 }
 
@@ -37,6 +37,7 @@ body {
     transform-origin: left center;
 }
 
+/* placeholder */
 #v::before, #v::after {
     content: "啊";
     color: transparent;

@@ -1,6 +1,6 @@
 let data;
 
-fetch("data_filtered.txt")
+fetch("assets/data.tsv")
   .then((response) => response.text())
   .then((data_) => {
     data = data_
@@ -8,6 +8,19 @@ fetch("data_filtered.txt")
       .split("\n")
       .map((line) => line.split("\t"));
     startBoard();
+  });
+
+let 推導方案;
+
+const data_url =
+  "https://nk2028-1305783649.file.myqcloud.com/qieyun-examples/tupa.js";
+
+fetch(data_url)
+  .then((response) => response.text())
+  .then((func_body) => {
+    推導方案 = Qieyun.推導方案.建立(
+      new Function("音韻地位", "字頭", "選項", func_body)
+    );
   });
 
 let isStopped = false;
@@ -25,9 +38,11 @@ function stopBoard() {
 
 function createRomanisationElement(k) {
   const span = document.createElement("span");
-  if (k.slice(-1) === "x") span.classList.add("tone-x");
-  else if (k.slice(-1) === "h") span.classList.add("tone-h");
-  span.innerText = k;
+  const 音韻地位 = Qieyun.音韻地位.from編碼(k);
+  const romanisation = 推導方案(音韻地位);
+  if (音韻地位.屬於("上聲")) span.classList.add("tone-x");
+  else if (音韻地位.屬於("去聲")) span.classList.add("tone-h");
+  span.innerText = romanisation;
   return span;
 }
 

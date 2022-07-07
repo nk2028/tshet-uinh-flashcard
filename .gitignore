@@ -1,1 +1,5 @@
-/data.txt
+node_modules
+/words.tsv
+/extra_words.tsv
+/package.json
+/package-lock.json
