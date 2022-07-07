@@ -5,34 +5,38 @@ const dictionary =
   fs.readFileSync("words.tsv", "utf8") +
   fs.readFileSync("extra_words.tsv", "utf8");
 
-const d = new Map();
+const map = new Map();
 
-for (const line of dictionary.trimEnd().split("\n")) {
-  const [c, vs] = line.split("\t");
-  if (!d.has(vs)) d.set(vs, new Set([c]));
-  else d.get(vs).add(c);
-}
+dictionary
+  .trimEnd()
+  .split("\n")
+  .forEach((line) => {
+    const [詞, 讀音們] = line.split("\t");
+    if (!map.has(讀音們)) map.set(讀音們, new Set([詞]));
+    else map.get(讀音們).add(詞);
+  });
 
-const a = [];
+const arr = [];
 
-for (const [vs, cs] of d) {
-  const cs_new = [...cs].join("/");
-  if (cs_new.length > 5) continue;
+map.forEach((詞們, 讀音們) => {
+  const 詞們_new = [...詞們].join("/");
+  if (詞們_new.length > 5) return;
 
-  const vs_new = vs
+  const 讀音們_new = 讀音們
     .split(" ")
     .map((描述) => Qieyun.音韻地位.from描述(描述).編碼)
     .join(" ");
 
-  a.push([vs_new, cs_new]);
-}
-
-a.sort(([ma, mb], [na, nb]) => {
-  if (ma.split(" ").length !== na.split(" ").length)
-    return ma.split(" ").length - na.split(" ").length;
-  return ma > na ? 1 : ma < na ? -1 : 0;
+  arr.push([讀音們_new, 詞們_new]);
 });
 
-const result = a.map(([vs, cs]) => vs + "\t" + cs).join("\n") + "\n";
+arr.sort(([讀音們_a], [讀音們_b]) => {
+  if (讀音們_a.split(" ").length !== 讀音們_b.split(" ").length)
+    return 讀音們_a.split(" ").length - 讀音們_b.split(" ").length;
+  return 讀音們_a > 讀音們_b ? 1 : 讀音們_a < 讀音們_b ? -1 : 0;
+});
+
+const result =
+  arr.map(([讀音們, 詞們]) => 讀音們 + "\t" + 詞們).join("\n") + "\n";
 
 fs.writeFileSync("assets/data.tsv", result);

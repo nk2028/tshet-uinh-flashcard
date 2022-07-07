@@ -38,11 +38,14 @@ function stopBoard() {
 
 function createRomanisationElement(k) {
   const span = document.createElement("span");
+
   const 音韻地位 = Qieyun.音韻地位.from編碼(k);
   const romanisation = 推導方案(音韻地位);
+  span.innerText = romanisation;
+
   if (音韻地位.屬於("上聲")) span.classList.add("tone-x");
   else if (音韻地位.屬於("去聲")) span.classList.add("tone-h");
-  span.innerText = romanisation;
+
   return span;
 }
 
