@@ -1,0 +1,44 @@
+html {
+    background-color: black;
+    color: #eee;
+    min-height: 100vh;
+    background-image: url(grid.jpg);
+    background-repeat: repeat;
+}
+
+body {
+    margin: 0;
+    text-align: center;
+}
+
+.display-area {
+    font-family: Roboto, 'Source Han Sans C', sans-serif;
+    font-size: 500%;
+    font-size: clamp(16px, 10vw, 500%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    flex-direction: column;
+}
+
+#k > span {
+    display: inline-block;
+    margin: 0 .15em;
+}
+
+.tone-x {
+    transform: rotate(-12deg);
+    transform-origin: left center;
+}
+
+.tone-h {
+    transform: rotate(12deg);
+    transform-origin: left center;
+}
+
+#v::before, #v::after {
+    content: "啊";
+    color: transparent;
+    display: inline-block;
+}
