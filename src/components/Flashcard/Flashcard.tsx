@@ -34,6 +34,7 @@ const Flashcard = ({
       setSettings((prev) => ({ ...prev, 推導方案 }));
     };
     initialiseData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settings.schemaID]);
 
   useEffect(() => {
