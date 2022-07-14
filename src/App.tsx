@@ -7,7 +7,7 @@ import { Settings } from "./types/pronunciation";
 
 function App() {
   const [settings, setSettings] = useState<Settings>({
-    isPaused: true,
+    isPaused: false,
     isWordOnLine1: false,
     shouldRotatePronunciation: true,
     speedLine1: 2000,

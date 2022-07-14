@@ -66,6 +66,7 @@ const ControlPanel = ({
         />
       </p>
       <p>
+        推導方案：
         <select
           lang="zh-HK"
           name="推導方案"
@@ -86,7 +87,7 @@ const ControlPanel = ({
       </p>
       <p>
         <label>
-          SpeedLine1:{" "}
+          第一行速度：
           <input
             type="number"
             min="0"
@@ -98,7 +99,7 @@ const ControlPanel = ({
       </p>
       <p>
         <label>
-          SpeedLine2:{" "}
+          第二行速度：
           <input
             type="number"
             min="0"
@@ -110,29 +111,27 @@ const ControlPanel = ({
         </label>
       </p>
 
-      <fieldset>
-        <legend>顯示模式</legend>
-        <p>
-          <label>
-            <input
-              type="radio"
-              value="音上詞下"
-              checked={settings.isWordOnLine1 === false}
-              onChange={handleChangeDisplayMode}
-            />
-            音上詞下
-          </label>
-          <label>
-            <input
-              type="radio"
-              value="詞上音下"
-              checked={settings.isWordOnLine1 === true}
-              onChange={handleChangeDisplayMode}
-            />
-            詞上音下
-          </label>
-        </p>
-      </fieldset>
+      <p>
+        顯示模式：
+        <label>
+          <input
+            type="radio"
+            value="音上詞下"
+            checked={settings.isWordOnLine1 === false}
+            onChange={handleChangeDisplayMode}
+          />
+          音上詞下
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="詞上音下"
+            checked={settings.isWordOnLine1 === true}
+            onChange={handleChangeDisplayMode}
+          />
+          詞上音下
+        </label>
+      </p>
 
       <p>
         <label>
