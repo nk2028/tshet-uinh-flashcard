@@ -47,6 +47,18 @@ const ControlPanel = ({
     }));
   };
 
+  const handleChangeChineseCharacterFont = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSettings((prev) => ({
+      ...prev,
+      chineseCharacterFontStyle: event.target.value as
+        | "sans-serif"
+        | "serif"
+        | "cursive",
+    }));
+  };
+
   const handleChangeShouldRotatePronunciation = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -80,10 +92,10 @@ const ControlPanel = ({
           <option value="zyepheng">隋拼</option>
           <option value="sliark_peengqvim">Sliark 拼音</option>
           <option value="ayaka_2021">字體測試</option>
-          {React.createElement("x-comment", {
-            text: "Ayaka 2021 Romanisation is still in its early stages. Labeled as 字體測試 (font test) to prevent inadvertent use.",
-          })}
         </select>
+        {React.createElement("x-comment", {
+          text: "Ayaka 2021 Romanisation is still in its early stages. Labeled as 字體測試 (font test) to prevent inadvertent use.",
+        })}
       </p>
       <p>
         <label>
@@ -134,6 +146,37 @@ const ControlPanel = ({
       </p>
 
       <p>
+        漢字字型：
+        <label>
+          <input
+            type="radio"
+            value="sans-serif"
+            checked={settings.chineseCharacterFontStyle === "sans-serif"}
+            onChange={handleChangeChineseCharacterFont}
+          />
+          黑體
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="serif"
+            checked={settings.chineseCharacterFontStyle === "serif"}
+            onChange={handleChangeChineseCharacterFont}
+          />
+          明體
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="cursive"
+            checked={settings.chineseCharacterFontStyle === "cursive"}
+            onChange={handleChangeChineseCharacterFont}
+          />
+          楷體 <span lang="en">(beta)</span>
+        </label>
+      </p>
+
+      <p>
         <label>
           <input
             type="checkbox"
@@ -142,6 +185,13 @@ const ControlPanel = ({
           />
           旋轉拼音
         </label>
+      </p>
+
+      <p>
+        檢視原始碼於{" "}
+        <a href="https://github.com/nk2028/tshet-uinh-flashcard" lang="en">
+          GitHub
+        </a>
       </p>
     </div>
   );

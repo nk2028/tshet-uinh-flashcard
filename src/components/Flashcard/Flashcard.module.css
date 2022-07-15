@@ -1,30 +1,29 @@
 .displayArea {
-    font-family: Roboto, 'Source Han Sans C', sans-serif;
-    font-size: 500%;
-    font-size: clamp(16px, 10vw, 500%);
-    min-height: 100vh;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-self: center;
-    flex-direction: column;
+  font-size: 500%;
+  font-size: clamp(16px, 10vw, 500%);
+  min-height: 100vh;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  flex-direction: column;
 }
 
 .pronunciation span {
-    display: inline-block;
-    margin: 0 .15em;
+  display: inline-block;
+  margin: 0 0.15em;
 }
 
 .rotate .toneX {
-    transform: rotate(-12deg);
-    transform-origin: left center;
+  transform: rotate(-12deg);
+  transform-origin: left center;
 }
 
 .rotate .toneH {
-    transform: rotate(12deg);
-    transform-origin: left center;
+  transform: rotate(12deg);
+  transform-origin: left center;
 }
 
 .emptyLine2Placeholder {
-    color: transparent;
+  color: transparent;
 }

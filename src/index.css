@@ -9,3 +9,30 @@ html {
 body {
   margin: 0;
 }
+
+:lang(zh-HK),
+:lang(ltc-Hant) {
+  font-language-override: "KOR";
+  font-family: Roboto, Arial, Helvetica, "Source Han Sans C",
+    "Source Han Sans K", "Source Han Sans TC", "Source Han Sans SC",
+    "Noto Sans CJK KR", "Noto Sans CJK TC", "Noto Sans CJK SC", "PingFang HK",
+    "PingFang TC", "Microsoft Jhenghei", sans-serif, HanaMin, sans-serif;
+}
+
+.chineseCharacterUseSerif :lang(zh-HK),
+.chineseCharacterUseSerif :lang(ltc-Hant) {
+  font-family: Roboto, Arial, Helvetica, "I.Ming", "Source Han Serif C",
+    "Source Han Serif K", "Source Han Serif TC", "Source Han Serif SC",
+    "Noto Serif CJK KR", "Noto Serif CJK TC", "Noto Serif CJK SC", serif,
+    HanaMin, serif;
+}
+
+.chineseCharacterUseCursive :lang(zh-HK),
+.chineseCharacterUseCursive :lang(ltc-Hant) {
+  font-family: Roboto, Arial, Helvetica, "華康香港標準楷書", "DFKai-SB", KaiTi,
+    cursive, HanaMin, cursive;
+}
+
+:lang(ltc-Latn) {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+}

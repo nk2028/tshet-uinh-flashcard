@@ -13,6 +13,7 @@ function App() {
     speedLine1: 2000,
     speedLine2: 500,
     schemaID: "tupa",
+    chineseCharacterFontStyle: "sans-serif",
   });
 
   return (

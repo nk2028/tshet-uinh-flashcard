@@ -122,7 +122,15 @@ const Flashcard = ({
   }, [settings]);
 
   return (
-    <div className={styles.displayArea}>
+    <div
+      className={
+        settings.chineseCharacterFontStyle === "serif"
+          ? "chineseCharacterUseSerif " + styles.displayArea
+          : settings.chineseCharacterFontStyle === "cursive"
+          ? "chineseCharacterUseCursive " + styles.displayArea
+          : styles.displayArea
+      }
+    >
       {lines.line1}
       {lines.line2}
     </div>
