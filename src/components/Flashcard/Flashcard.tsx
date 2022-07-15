@@ -6,7 +6,7 @@ import styles from "./Flashcard.module.css";
 
 import { PronunciationData, Settings } from "../../types/pronunciation";
 
-import { fetchData } from "../../api/data";
+import { promiseDataSmall, promiseDataLarge } from "../../api/data";
 
 const Flashcard = ({
   settings,
@@ -23,7 +23,9 @@ const Flashcard = ({
     line1: <></>,
     line2: <></>,
   });
-  const [pronunciationData, setPronunciationData] =
+  const [pronunciationDataSmall, setPronunciationDataSmall] =
+    useState<PronunciationData>();
+  const [pronunciationDataLarge, setPronunciationDataLarge] =
     useState<PronunciationData>();
   const [isInitialised, setIsInitialised] = useState<boolean>(false);
 
@@ -54,7 +56,10 @@ const Flashcard = ({
   };
 
   const refreshBoard = () => {
-    if (pronunciationData) {
+    if (pronunciationDataSmall && pronunciationDataLarge) {
+      const pronunciationData = settings.shouldUseLargePronunciationData
+        ? pronunciationDataLarge
+        : pronunciationDataSmall;
       const { length: dataLen } = pronunciationData;
       const idx = Math.floor(Math.random() * dataLen);
       const [pronunciation, word] = pronunciationData[idx];
@@ -103,7 +108,10 @@ const Flashcard = ({
 
   useEffect(() => {
     (async () => {
-      setPronunciationData(await fetchData());
+      const [pronunciationDataSmall, pronunciationDataLarge] =
+        await Promise.all([promiseDataSmall, promiseDataLarge]);
+      setPronunciationDataSmall(pronunciationDataSmall);
+      setPronunciationDataLarge(pronunciationDataLarge);
       setIsInitialised(true);
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -11,6 +11,7 @@ function App() {
     isPaused: false,
     isWordOnLine1: false,
     shouldRotatePronunciation: true,
+    shouldUseLargePronunciationData: false,
     speedLine1: 2000,
     speedLine2: 500,
     chineseCharacterFontStyle: "sans-serif",

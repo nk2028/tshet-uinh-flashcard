@@ -51,15 +51,22 @@ const ControlPanel = ({
     }));
   };
 
+  const handleChangeShouldUseLargePronunciationData = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSettings((prev) => ({
+      ...prev,
+      shouldUseLargePronunciationData: event.target.value === "大詞庫",
+    }));
+  };
+
   const handleChangeChineseCharacterFont = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setSettings((prev) => ({
       ...prev,
-      chineseCharacterFontStyle: event.target.value as
-        | "sans-serif"
-        | "serif"
-        | "cursive",
+      chineseCharacterFontStyle: event.target
+        .value as typeof prev.chineseCharacterFontStyle,
     }));
   };
 
@@ -177,6 +184,28 @@ const ControlPanel = ({
             onChange={handleChangeChineseCharacterFont}
           />
           楷體 <span lang="en">(beta)</span>
+        </label>
+      </p>
+
+      <p>
+        詞庫大小：
+        <label>
+          <input
+            type="radio"
+            value="小詞庫"
+            checked={settings.shouldUseLargePronunciationData === false}
+            onChange={handleChangeShouldUseLargePronunciationData}
+          />
+          小詞庫
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="大詞庫"
+            checked={settings.shouldUseLargePronunciationData === true}
+            onChange={handleChangeShouldUseLargePronunciationData}
+          />
+          大詞庫
         </label>
       </p>
 

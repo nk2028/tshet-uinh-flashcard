@@ -10,6 +10,7 @@ export interface Settings {
   isPaused: boolean;
   isWordOnLine1: boolean;
   shouldRotatePronunciation: boolean;
+  shouldUseLargePronunciationData: boolean;
   speedLine1: number;
   speedLine2: number;
   chineseCharacterFontStyle: "sans-serif" | "serif" | "cursive";
