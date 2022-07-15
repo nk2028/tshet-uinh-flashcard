@@ -12,7 +12,6 @@ export interface Settings {
   shouldRotatePronunciation: boolean;
   speedLine1: number;
   speedLine2: number;
-  schemaID: string;
   chineseCharacterFontStyle: "sans-serif" | "serif" | "cursive";
-  推導方案?: 推導函數;
+  推導方案: 推導函數;
 }

@@ -4,6 +4,7 @@ import Flashcard from "./components/Flashcard/Flashcard";
 import ControlPanel from "./components/ControlPanel/ControlPanel";
 
 import { Settings } from "./types/pronunciation";
+import { getSchema } from "./api/schema";
 
 function App() {
   const [settings, setSettings] = useState<Settings>({
@@ -12,8 +13,8 @@ function App() {
     shouldRotatePronunciation: true,
     speedLine1: 2000,
     speedLine2: 500,
-    schemaID: "tupa",
     chineseCharacterFontStyle: "sans-serif",
+    推導方案: getSchema("tupa"),
   });
 
   return (

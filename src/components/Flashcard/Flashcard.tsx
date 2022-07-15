@@ -7,7 +7,6 @@ import styles from "./Flashcard.module.css";
 import { PronunciationData, Settings } from "../../types/pronunciation";
 
 import { fetchData } from "../../api/data";
-import { refreshSchema } from "../../api/schema";
 
 const Flashcard = ({
   settings,
@@ -26,92 +25,91 @@ const Flashcard = ({
   });
   const [pronunciationData, setPronunciationData] =
     useState<PronunciationData>();
+  const [isInitialised, setIsInitialised] = useState<boolean>(false);
 
-  useEffect(() => {
-    const initialiseData = async () => {
-      setPronunciationData(await fetchData());
-      const 推導方案 = refreshSchema(settings.schemaID);
-      setSettings((prev) => ({ ...prev, 推導方案 }));
-    };
-    initialiseData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [settings.schemaID]);
+  const createRomanisationElements = (pronunciation: string) => {
+    return <>{pronunciation.split(" ").map(createRomanisationElement)}</>;
+  };
 
-  useEffect(() => {
-    const createRomanisationElements = (pronunciation: string) => {
-      return <>{pronunciation.split(" ").map(createRomanisationElement)}</>;
-    };
+  const createRomanisationElement = (
+    singlePronunciation: string,
+    index: number
+  ) => {
+    const 音韻地位 = Qieyun.音韻地位.from編碼(singlePronunciation);
+    const romanisation = settings.推導方案(音韻地位);
+    return (
+      <span
+        className={
+          音韻地位.屬於("上聲")
+            ? styles.toneX
+            : 音韻地位.屬於("去聲")
+            ? styles.toneH
+            : undefined
+        }
+        key={index}
+      >
+        {romanisation}
+      </span>
+    );
+  };
 
-    const createRomanisationElement = (
-      singlePronunciation: string,
-      index: number
-    ) => {
-      const 音韻地位 = Qieyun.音韻地位.from編碼(singlePronunciation);
-      const romanisation = settings.推導方案!(音韻地位);
-      return (
-        <span
+  const refreshBoard = () => {
+    if (pronunciationData) {
+      const { length: dataLen } = pronunciationData;
+      const idx = Math.floor(Math.random() * dataLen);
+      const [pronunciation, word] = pronunciationData[idx];
+
+      const elementPronunciation = (
+        <p
+          lang="ltc-Latn"
           className={
-            音韻地位.屬於("上聲")
-              ? styles.toneX
-              : 音韻地位.屬於("去聲")
-              ? styles.toneH
-              : undefined
+            settings.shouldRotatePronunciation
+              ? styles.rotate + " " + styles.pronunciation
+              : styles.pronunciation
           }
-          key={index}
         >
-          {romanisation}
-        </span>
+          {createRomanisationElements(pronunciation)}
+        </p>
       );
-    };
+      const elementWord = (
+        <p lang="ltc-Hant" className={styles.word}>
+          {word}
+        </p>
+      );
+      const elementLine2Placeholder = (
+        <p lang="ltc-Hant" className={styles.emptyLine2Placeholder}>
+          {settings.isWordOnLine1 ? "p" : "佔"}
+        </p>
+      );
 
-    const refreshBoard = () => {
-      if (pronunciationData && settings.推導方案) {
-        const { length: dataLen } = pronunciationData;
-        const idx = Math.floor(Math.random() * dataLen);
-        const [pronunciation, word] = pronunciationData[idx];
+      const contentLine1 = settings.isWordOnLine1
+        ? elementWord
+        : elementPronunciation;
+      const contentLine2 = settings.isWordOnLine1
+        ? elementPronunciation
+        : elementWord;
 
-        const elementPronunciation = (
-          <p
-            lang="ltc-Latn"
-            className={
-              settings.shouldRotatePronunciation
-                ? styles.rotate + " " + styles.pronunciation
-                : styles.pronunciation
-            }
-          >
-            {createRomanisationElements(pronunciation)}
-          </p>
-        );
-        const elementWord = (
-          <p lang="ltc-Hant" className={styles.word}>
-            {word}
-          </p>
-        );
-        const elementLine2Placeholder = (
-          <p lang="ltc-Hant" className={styles.emptyLine2Placeholder}>
-            {settings.isWordOnLine1 ? "p" : "佔"}
-          </p>
-        );
+      setLines((prev) => ({
+        ...prev,
+        line1: contentLine1,
+        line2: elementLine2Placeholder,
+      }));
 
-        const contentLine1 = settings.isWordOnLine1
-          ? elementWord
-          : elementPronunciation;
-        const contentLine2 = settings.isWordOnLine1
-          ? elementPronunciation
-          : elementWord;
+      window.setTimeout(() => {
+        setLines((prev) => ({ ...prev, line2: contentLine2 }));
+      }, settings.speedLine2);
+    }
+  };
 
-        setLines((prev) => ({
-          ...prev,
-          line1: contentLine1,
-          line2: elementLine2Placeholder,
-        }));
+  useEffect(() => {
+    (async () => {
+      setPronunciationData(await fetchData());
+      setIsInitialised(true);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-        window.setTimeout(() => {
-          setLines((prev) => ({ ...prev, line2: contentLine2 }));
-        }, settings.speedLine2);
-      }
-    };
-
+  useEffect(() => {
     if (!settings.isPaused) {
       const boardEvent = window.setInterval(refreshBoard, settings.speedLine1);
       return () => {
@@ -119,7 +117,7 @@ const Flashcard = ({
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [settings]);
+  }, [isInitialised, settings]);
 
   return (
     <div

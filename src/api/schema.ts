@@ -18,7 +18,7 @@ const {
 
 const { ayaka_2021 } = require("./ayaka_2021");
 
-export const refreshSchema = (schemaID: string) => {
+export const getSchema = (schemaID: string) => {
   return {
     tupa,
     baxter,

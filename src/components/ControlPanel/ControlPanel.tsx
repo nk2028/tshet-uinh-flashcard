@@ -3,6 +3,7 @@ import React from "react";
 import styles from "./ControlPanel.module.css";
 
 import { Settings } from "../../types/pronunciation";
+import { getSchema } from "../../api/schema";
 
 const ControlPanel = ({
   settings,
@@ -12,7 +13,10 @@ const ControlPanel = ({
   setSettings: React.Dispatch<React.SetStateAction<Settings>>;
 }) => {
   const handleChangeSchema = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSettings((prev) => ({ ...prev, schemaID: event.target.value }));
+    setSettings((prev) => ({
+      ...prev,
+      推導方案: getSchema(event.target.value),
+    }));
   };
 
   const handleChangePaused = () => {
