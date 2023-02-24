@@ -18,6 +18,8 @@ const {
 
 const { ayaka_2021 } = require("./ayaka_2021");
 
+const phonological_position = (x: any) => x.最簡描述;
+
 export const getSchema = (schemaID: string) => {
   return {
     tupa,
@@ -27,5 +29,6 @@ export const getSchema = (schemaID: string) => {
     zyepheng,
     sliark_peengqvim,
     ayaka_2021,
+    phonological_position,
   }[schemaID];
 };

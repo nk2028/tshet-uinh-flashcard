@@ -102,6 +102,7 @@ const ControlPanel = ({
           <option value="kyonh">古韻羅馬字</option>
           <option value="zyepheng">隋拼</option>
           <option value="sliark_peengqvim">Sliark 拼音</option>
+          <option value="phonological_position">音韻地位</option>
           <option value="ayaka_2021">字體測試</option>
         </select>
         {React.createElement("x-comment", {
