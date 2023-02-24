@@ -24,11 +24,11 @@ The aim of Tshet-Uinh Flashcard is to provide users with a user-friendly and acc
 
 ### How does Tshet-Uinh Flashcard help with the study of the Tshet-Uinh phonological system?
 
-The Tshet-Uinh Flashcard Project helps with the study of the Tshet-Uinh phonological system by providing users with a convenient and effective tool to practice the pronunciation of words. By using flashcards, users can focus on specific words and pronunciation, allowing them to target areas that need improvement and receive immediate feedback.
+The Tshet-Uinh Flashcard Project helps with the study of the Tshet-Uinh phonological system by providing users with a convenient and effective tool to practise the pronunciation of words. By using flashcards, users can focus on specific words and pronunciation, allowing them to target areas that need improvement and receive immediate feedback.
 
 ### What are the benefits of using Tshet-Uinh Flashcard?
 
-The benefits of using Tshet-Uinh Flashcard include improved memorisation, effective practice, flexible study, customisable learning, multisensory learning, and increased confidence. By practising and mastering the pronunciation of words, users can increase their confidence and fluency when speaking and reciting the Tshet-Uinh phonological system.
+The benefits of using Tshet-Uinh Flashcard include improved memorisation, effective practise, flexible study, customisable learning, multisensory learning, and increased confidence. By practising and mastering the pronunciation of words, users can increase their confidence and fluency when speaking and reciting the Tshet-Uinh phonological system.
 
 ### Are there any configurations available?
 
@@ -36,7 +36,7 @@ Yes, there are several configurations available, including adjusting the speed, 
 
 ### Is Tshet-Uinh Flashcard accessible from any device?
 
-Yes, Tshet-Uinh Flashcard is accessible from any device with a browser, making it easy to study and practice anywhere at any time.
+Yes, Tshet-Uinh Flashcard is accessible from any device with a browser, making it easy to study and practise anywhere at any time.
 
 ## Develop
 
